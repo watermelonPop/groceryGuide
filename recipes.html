@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/b7b6d87d91.js" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+</head>
+<body class="background">
+        <div class="outerContent">
+                <div class="topBar">
+                        <p class="mainIcon"><i class="fa-solid fa-cart-shopping"></i></p>
+                        <p class="title">Grocery Guide</p>
+                </div>
+                <div class="middle">
+                        <div class="innerTitleDiv">
+                                <p class="innerTitle">My Recipes</p>
+                        </div>
+                        <div class="myRecipes" id="myRecipes">
+
+                        </div>
+                        <div class="newRecipe" onclick="openNewRecipeModal()">
+                                <p>+ recipe</p>
+                        </div>
+                </div>
+                <div class="bottBar">
+                        <div class="innerBottBar">
+                                <a class="mainIcon" id="list" href="./lists.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-list"></i></a>
+                                <a class="mainIcon" id="home" href="./content.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-house"></i></a>
+                                <a class="mainIcon" id="filters" href="./filters.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-filter"></i></a>
+                        </div>
+                </div>
+
+                <div id="newRecipeModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                                <span class="close" onclick="closeNewRecipeModal()">&times;</span>
+                                <div class="innerModalContent">
+                                        <p class="innerTitle">New Recipe</p>
+                                        <div class="recipeForm">
+                                                <div class="recipeFormLine">
+                                                        <p class="newListLabel">Title: </p>
+                                                        <input type="text" class="newListInput" id="recipeTitle">
+                                                </div>
+                                                <div class="recipeIngFormLine">
+                                                        <p class="topIngTitle">Ingredients: </p>
+                                                        <div class="ingredients" id="ingredients">
+
+                                                        </div>
+                                                        <p class="ingBtn" onclick="addIngredient()">+ ingredient</p>
+                                                </div>
+                                                <div class="recipeBigFormLine">
+                                                        <p class="topIngTitle">Instructions</p>
+                                                        <textarea rows="10" cols="30" id="recipeInstructions">
+                                                        </textarea>
+                                                </div>
+                                                
+                                               
+                                        </div>
+                                        <div class="recipeSubmit">
+                                                <p onclick="createRecipe()">create</p>
+                                        </div>
+                                </div>
+                        </div>
+                      
+                </div>
+        </div>
+
+        <script>
+
+                function createRecipe(){
+                        let title = document.getElementById("recipeTitle").value;
+                        let instructions = document.getElementById("recipeInstructions").value;
+                        if(title.trim() == "" || instructions.trim() == ""){
+                                alert("Title or Instructions Missing")
+                        }else{
+                                let ingredients = [];
+                                let brandList = document.querySelectorAll(".brandInput");
+                                let ingList = document.querySelectorAll(".ingInput");
+                                if(ingList.length == 0){
+                                        alert("No ingredients Added");
+                                }else{
+                                        for(let i = 0; i < ingList.length; i++){
+                                                let brands = getBrands(ingList[i].value);
+                                                let ind = brandList[i].value;
+                                                ingredients.push(brands[ind]);
+                                        }
+
+                                        let newRecipe = new recipe(title, ingredients, instructions);
+                                        if(localStorage.getItem('recipes') !== null){
+                                                recipes = JSON.parse(localStorage.getItem('recipes'));
+                                        }
+                                        recipes.push(newRecipe);
+                                        localStorage.setItem('recipes', JSON.stringify(recipes));
+                                        location.reload();
+                                }
+                        }
+
+                }
+                function addIngredient(){
+                        let ingredients = document.getElementById("ingredients");
+                        let ingLine = document.createElement("div");
+                        ingLine.className = "newListInputDiv";
+                        let ingDelLabel = document.createElement('p');
+                        ingDelLabel.className = "newListDelBtnRecipe";
+                        ingDelLabel.innerHTML = '<i class="fa-solid fa-x"></i>';
+                        let ingNameLabel = document.createElement("p");
+                        ingNameLabel.className = "newListLabel";
+                        ingNameLabel.textContent = "Item: ";
+                        let ingName = document.createElement('select');
+                        ingName.classList.add("itemSelect", "ingInput")
+                        let unique = getUniqueItemTypes();
+                        for(let i = 0; i < unique.length; i++){
+                                let option = document.createElement('option');
+                                option.value = unique[i];
+                                option.text = unique[i];
+                                ingName.appendChild(option);
+                        }
+                        ingLine.appendChild(ingDelLabel);
+                        ingLine.appendChild(ingNameLabel);
+                        ingLine.appendChild(ingName);
+                        ingredients.appendChild(ingLine);
+
+                        let brandLine = document.createElement('div');
+                        brandLine.className = "newListInputDiv";
+                        let brandNameLabel = document.createElement("p");
+                        brandNameLabel.className = "newListLabel";
+                        brandNameLabel.textContent = "Brand: ";
+                        let brandName = document.createElement('select');
+                        brandName.classList.add("itemSelect", "brandInput")
+                        let uniqueBrands = getBrands(ingName.value);
+                        for(let i = 0; i < uniqueBrands.length; i++){
+                                let option = document.createElement('option');
+                                option.value = i;
+                                option.text = uniqueBrands[i].brand + " - $" + getPriceStr(uniqueBrands[i].price);
+                                brandName.appendChild(option);
+                        }
+                        brandLine.appendChild(brandNameLabel);
+                        brandLine.appendChild(brandName);
+                        ingredients.appendChild(brandLine);
+
+                        ingName.addEventListener("change", function() {
+                                brandName.innerHTML = "";
+                                let uniqueBrands = getBrands(ingName.value);
+                                for(let i = 0; i < uniqueBrands.length; i++){
+                                        let option = document.createElement('option');
+                                        option.value = i;
+                                        option.text = uniqueBrands[i].brand + " - $" + getPriceStr(uniqueBrands[i].price);
+                                        brandName.appendChild(option);
+                                }
+                        });
+
+                        ingDelLabel.addEventListener("click", function() {
+                                ingredients.removeChild(brandLine);
+                                ingredients.removeChild(ingLine);
+                        });
+                }
+                window.onload = function() {
+                        if(localStorage.getItem('recipes') !== null){
+                                recipes = JSON.parse(localStorage.getItem('recipes'));
+                        }
+                        let recs = document.getElementById("myRecipes");
+                        recs.innerHTML = "";
+                        for(let i = 0; i < recipes.length; i++){
+                                let outerRecipeDiv = document.createElement('div');
+                                outerRecipeDiv.className = "outerRecipeDiv";
+                                let innerRecipeDiv = document.createElement('div');
+                                innerRecipeDiv.className = "innerRecipeDiv";
+                                let recipeInfoBtn = document.createElement('p');
+                                recipeInfoBtn.className = "recipeInfoBtn";
+                                recipeInfoBtn.innerHTML = '<i class="fa-solid fa-circle-info"></i>';
+                                let recipeName = document.createElement('p');
+                                recipeName.textContent = recipes[i].name;
+
+                                innerRecipeDiv.appendChild(recipeInfoBtn);
+                                innerRecipeDiv.appendChild(recipeName);
+                                outerRecipeDiv.appendChild(innerRecipeDiv);
+
+                                let bottomRecipeDiv = document.createElement('div');
+                                bottomRecipeDiv.className = "bottomRecipeDiv";
+                                
+                                let ingList = document.createElement('ul');
+                                let recipeIng = recipes[i].ingredients;
+
+                                for(let j = 0; j < recipeIng.length; j++){
+                                        //alert(recipeIng[j].name);
+                                        let ingItem = document.createElement('li');
+                                        ingItem.textContent = recipeIng[j].name;
+                                        ingList.appendChild(ingItem);
+                                }
+                                //alert(ingList);
+                                bottomRecipeDiv.appendChild(ingList);
+                                bottomRecipeDiv.style.display = "none";
+                                outerRecipeDiv.appendChild(bottomRecipeDiv);
+
+                                recs.append(outerRecipeDiv);
+                                recipeInfoBtn.addEventListener("click", function() {
+                                        if(bottomRecipeDiv.style.display == "none"){
+                                                innerRecipeDiv.style.height = "30%";
+                                                innerRecipeDiv.style.borderBottomLeftRadius = "0px";
+                                                innerRecipeDiv.style.borderBottomRightRadius = "0px";
+                                                outerRecipeDiv.style.minHeight = "20%"
+                                                bottomRecipeDiv.style.display = "flex";
+                                        }else if(bottomRecipeDiv.style.display == "flex"){
+                                                innerRecipeDiv.style.height = "100%";
+                                                innerRecipeDiv.style.borderBottomLeftRadius = "8px";
+                                                outerRecipeDiv.style.minHeight = "7%"
+                                                innerRecipeDiv.style.borderBottomRightRadius = "8px";
+                                                bottomRecipeDiv.style.display = "none";
+                                        }
+                                });
+                        }
+                };
+
+                function openNewRecipeModal(){
+                        document.getElementById("newRecipeModal").style.display = "flex";
+                }
+
+                function closeNewRecipeModal(){
+                        document.getElementById("newRecipeModal").style.display = "none";
+                }
+        </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/b7b6d87d91.js" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+</head>
+<body class="background">
+        <div class="outerContent">
+                <div class="topBar">
+                        <p class="mainIcon"><i class="fa-solid fa-cart-shopping"></i></p>
+                        <p class="title">Grocery Guide</p>
+                </div>
+                <div class="middle">
+                        <div class="innerTitleDiv">
+                                <p class="innerTitle">Lists</p>
+                        </div>
+                        <div class="listBody" id="listBody">
+                                <a class="listBtn" href="./inList.html" onclick="setInListInfo(0)">weekly - 11/10/24</a>
+                                <a class="listBtn" href="./inList.html" onclick="setInListInfo(1)">weekly - 11/3/24</a>
+                                <a class="listBtn" href="./inList.html" onclick="setInListInfo(2)">untitled - 10/20/24</a>
+                        </div>
+                        <div class="newListBtnDiv">
+                                <a class="newListBtn" href="./newList.html">+</a>
+                        </div>
+                </div>
+                <div class="bottBar">
+                        <div class="innerBottBar">
+                                <a class="mainIcon" id="list" href="./lists.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-list"></i></a>
+                                <a class="mainIcon" id="home" href="./content.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-house"></i></a>
+                                <a class="mainIcon" id="filters" href="./filters.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-filter"></i></a>
+                        </div>
+                </div>
+        </div>
+
+        <script>
+                window.onload = function() {
+                        document.getElementById("listBody").innerHTML = "";
+                        if(localStorage.getItem('allLists') !== null){
+                                let allL = JSON.parse(localStorage.getItem('allLists'));
+                                //alert(allL);
+                                lists = allL;
+                        }
+                        for(let i = 0; i < lists.length; i++){
+                                let ist = lists[i];
+                                document.getElementById("listBody").innerHTML += '<a class="listBtn" href="./inList.html" onclick="setInListInfo(' + i + ')">' + ist.title + ' - ' + ist.date + '</a>';
+                        }
+                };
+        </script>
+</body>
+</html>

@@ -1,0 +1,940 @@
+:root {
+        --primarycolor: #A0C1B9;
+        --backgroundcolor: #E1E6E5;
+        --accentcolor: #2E4057;
+        --subaccent: #02291B;
+        --title: 30px;
+        --subtitle: 25px;
+        --txt: 20px;
+        --mainTxt: 16px;
+}
+
+.background{
+        background-color: var(--backgroundcolor);
+        font-family: "Quicksand", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+}
+
+.outerDemo{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        row-gap: 5%;
+}
+
+.outerTitle{
+        background-color: var(--primarycolor);
+        width: 85%;
+        height: 15%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+}
+
+.outerDemoBtn{
+        width: 85%;
+        height: 50%;
+        background-color: var(--primarycolor);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+}
+
+.title{
+        font-size: var(--title);
+        padding: 0;
+        margin-bottom: 1%;
+        margin-top: 0;
+        margin-left: 5%;
+        margin-right: 5%;
+}
+
+.subtitle{
+        font-size: var(--mainTxt);
+        padding: 0;
+
+        margin-bottom: 0;
+        margin-top: 1%;
+        margin-left: 5%;
+        margin-right: 5%;
+}
+
+.demoBtn{
+        width: 50%;
+        height: 25%;
+        border-radius: 8px;
+        outline: none;
+        border-style: none;
+        background-color: var(--backgroundcolor);
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: var(--mainTxt);
+        cursor: pointer;
+}
+
+.demoBtn:hover{
+        background-color: var(--accentcolor);
+        color: var(--backgroundcolor);
+}
+
+.topBar{
+        background-color: var(--primarycolor);
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 5%;
+}
+
+.middle{
+        background-color: var(--backgroundcolor);
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 2%;
+}
+
+.bottBar{
+        background-color: var(--primarycolor);
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+}
+
+.outerContent{
+        display: flex;
+        flex-direction: column;
+        background-color: aliceblue;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+}
+
+.innerBottBar{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+}
+
+.mainIcon{
+        font-size: var(--title);
+        cursor: pointer;
+        color: black;
+        text-decoration: none;
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.innerTitleDiv{
+        width: 85%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 7%;
+        background-color: var(--primarycolor);
+        border-radius: 8px;
+}
+
+.innerTitle{
+        font-size: var(--subtitle);
+        margin: 0;
+        padding: 0;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        color: black;
+}
+
+.innerTitle i{
+        cursor: pointer;
+}
+
+.listBody{
+        width: 85%;
+        height: 75%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        row-gap: 3%;
+}
+
+.inListBody{
+        width: 85%;
+        height: 67%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        row-gap: 3%;
+        align-items: flex-end;
+}
+
+.inListItem{
+        background-color: var(--primarycolor);
+        border-radius: 8px;
+        width: 100%;
+        height: 15%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: var(--mainTxt);
+}
+
+.underListItem{
+        background-color: var(--accentcolor);
+        border-radius: 8px;
+        width: 75%;
+        height: 15%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center; 
+        color: var(--backgroundcolor);
+        font-size: var(--mainTxt);
+}
+
+.innerInfoDiv{
+        width: 80%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+}
+
+.innerInfoDiv p{
+        margin: 0;
+}
+
+.inListItemTitle{
+        width: 80%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.listBtn{
+        width: 100%;
+        height: 6%;
+        border-radius: 8px;
+        background-color: var(--accentcolor);
+        outline: none;
+        color: var(--backgroundcolor);
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: var(--mainTxt);
+        padding-top: 2%;
+        padding-bottom: 2%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+}
+
+.newListBtnDiv{
+        width: 85%;
+        height: 7%;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+}
+
+.newListBtn{
+        border-radius: 50%;
+        height: 6vh;
+        width: 6vh;
+        outline: none;
+        text-decoration: none;
+        border-style: none;
+        background-color: var(--subaccent);
+        color: var(--backgroundcolor);
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: var(--title);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.totalSummary{
+        width: 85%;
+        height: 17%;
+        border-radius: 8px;
+        border-color: black;
+        border-style: solid;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+}
+
+.inBudget{
+        width: 25%;
+        height: 85%;
+        border-radius: 8px;
+        background-color: var(--subaccent);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+}
+
+.inBudget p{
+        color: var(--backgroundcolor);
+        text-align: center;
+        font-size: var(--mainTxt);
+}
+
+.totals{
+        width: 67%;
+        height: 85%;
+        font-size: var(--mainTxt);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+}
+
+.innerTotalsDiv{
+        width: 80%;
+        height: 25%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+}
+
+.innerTotalsDiv p{
+        margin: 0;
+}
+
+.modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        justify-content: center;
+        align-items: center;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+      
+      /* Modal Content/Box */
+      .modal-content {
+        background-color: var(--backgroundcolor);
+        margin: 0 auto;
+        max-height: 80vh;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        height: 60%;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .modal-content-edit{
+        background-color: var(--backgroundcolor);
+        margin: 0 auto;
+        max-height: 80vh;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        height: 80%;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .modal-content-save{
+        background-color: var(--backgroundcolor);
+        margin: 0 auto;
+        max-height: 80vh;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        height: 30%;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+      
+      /* The Close Button */
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: var(--mainTxt);
+        font-weight: bold;
+        width: 90%;
+        text-align: right;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .innerModalContent{
+        width: 90%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-y: scroll;
+        padding: 20px 5%;
+      }
+
+      .innerSaveDiv{
+        width: 90%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 5%;
+      }
+      .innerModalContent > *:first-child {
+        margin-top: 20px;
+    }
+
+      .modalTxt{
+        font-size: var(--mainTxt);
+        text-align: center;
+      }
+
+      .altOption{
+        background-color: var(--primarycolor);
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        height: fit-content;
+        border-radius: 8px;
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+      .altOption p{
+        font-size: var(--mainTxt);
+      }
+
+      #altsList{
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 5%;
+        margin-top: 5%;
+      }
+
+      .replaceIcon{
+        height: 20%;
+        width: fit-content;
+        background-color: var(--backgroundcolor);
+        padding: 2%;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .newListDiv{
+        width: 85%;
+        height: 50%;
+        max-height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto; /* Add scroll when content exceeds height */
+        padding: 20px; /* Add some padding for better appearance */
+        box-sizing: border-box; /* Include padding in the element's total width and height */
+        }
+
+        .editListDiv{
+                width: 100%;
+                height: 70%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow-y: auto; /* Add scroll when content exceeds height */
+                padding: 0; /* Add some padding for better appearance */ /* Include padding in the element's total width and height */         
+        }
+
+      .newListInputDiv{
+        display: flex;
+        width: 85%;
+        height: 7%;
+        min-height: 50px;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px; /* Add some space between items */
+        margin-top: 5%;
+      }
+
+      .newListInput{
+        width: 70%;
+        height: 100%;
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: var(--txt);
+        background-color: var(--primarycolor);
+        border-radius: 8px;
+        border-style: none;
+        outline: none;
+      }
+
+      .newListLabel{
+        width: 30%;
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: var(--txt);
+        margin-left: 5%;
+      }
+
+      .newListDelBtn{
+        width: 10%;
+        height: 50%;
+        background-color: var(--accentcolor);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--backgroundcolor);
+        font-size: var(--mainTxt);
+        cursor: pointer;
+      }
+
+      .newListDelBtnRecipe{
+        width: 10%;
+        height: 50%;
+        background-color: var(--accentcolor);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--backgroundcolor);
+        font-size: var(--mainTxt);
+      }
+
+      .newListItemBtn{
+        background-color: var(--accentcolor);
+        width: 50%;
+        min-height: 50px;
+        height: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        margin-top: 5%;
+        color: var(--backgroundcolor);
+        font-size: var(--txt);
+        cursor: pointer;
+      }
+      
+
+
+      .itemSelect{
+        width: 60%;
+        height: 100%;
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: var(--mainTxt);
+        background-color: var(--primarycolor);
+        border-radius: 8px;
+        border-style: none;
+      }
+
+      .brandSelect{
+        width: 70%;
+        height: 100%;
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: var(--mainTxt);
+        background-color: var(--primarycolor);
+        border-radius: 8px;
+        border-style: none;
+
+      }
+
+      .filterDiv{
+        width: 85%;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        row-gap: 5%;
+        overflow-y: scroll;
+      }
+
+      .innerFilter{
+        width: 90%;
+        height: 10%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 5%;
+      }
+
+      .saveBtn{
+        width: 30%;
+        height: 10%;
+        background-color: var(--accentcolor);
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: var(--mainTxt);
+        color: var(--backgroundcolor);
+        cursor: pointer;
+      }
+
+      .saveTxt{
+        font-size: var(--title);
+        text-align: center;
+      }
+
+      .homeDiv{
+        width: 85%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        row-gap: 5%;
+      }
+
+      .homeTitle{
+        width: 100%;
+        height: 10%;
+        font-size: var(--txt);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        margin-top: 5%;
+      }
+
+      .quickBtn{
+        width: 50%;
+        height: 10%;
+        background-color: var(--accentcolor);
+        font-size: var(--mainTxt);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        border-style: none;
+        text-decoration: none;
+        color: var(--backgroundcolor);
+        font-family: inherit;
+        font-weight: inherit;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .innerRecipeDiv{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: var(--primarycolor);
+        border-radius: 8px;
+      }
+
+      .recipeDiv{
+        width: 100%;
+        height: 85%;
+        margin-top: 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        row-gap: 5%;
+        overflow-y: scroll;
+      }
+
+      .addRecipeBtn{
+        height: 70%;
+        width: 10%;
+        background-color: var(--backgroundcolor);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .outerRecipeDiv{
+        width: 100%;
+        height: fit-content;
+        min-height: 7%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .bottomRecipeDiv{
+        background-color: var(--primarycolor);
+        width: 100%;
+        height: 70%;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      .filterTitle{
+        width: 85%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: var(--txt);
+      }
+
+      .suggestions{
+        width: 85%;
+        height: 90%;
+      }
+
+      .suggTitle{
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: var(--txt);
+        text-align: center;
+      }
+
+      .suggs{
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .suggInner{
+        width: 100%;
+        height: 10%;
+        background-color: var(--accentcolor);
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 8px;
+        color: var(--backgroundcolor);
+        cursor: pointer;
+      }
+
+      .myRecipes{
+        width: 85%;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        row-gap: 2%;
+      }
+
+      .newRecipe{
+        width: 40%;
+        height: 7%;
+        background-color: var(--accentcolor);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: var(--txt);
+        color: var(--backgroundcolor);
+        cursor: pointer;
+      }
+
+      .recipeForm{
+        width: 85%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        row-gap: 5%;
+      }
+
+      .recipeFormLine{
+        width: 100%;
+        height: 10%;
+        min-height: 10%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .recipeFormInput{
+        width: 70%;
+        height: 60%;
+        border-radius: 8px;
+        border-style: none;
+      }
+
+      .recipeBigFormLine{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .recipeIngFormLine{
+        width: 100%;
+        min-height: 10%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .topIngTitle{
+        width: 100%;
+        height: 5vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: var(--txt);
+        margin: 0;
+      }
+
+      .ingLine{
+        background-color: aquamarine;
+        width: 100%;
+        height: 5vh;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .ingredients{
+        width: 100%;
+        height: fit-content;
+        max-height: 70%;
+        overflow-y: scroll;
+      }
+
+      .ingNameLabel{
+        width: 30%;
+        background-color: blue;
+        height: 100%;
+      }
+
+      .recipeSubmit{
+        width: 85%;
+        height: 10%;
+        min-height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .recipeSubmit p{
+        background-color: var(--accentcolor);
+        border-radius: 8px;
+        width: 40%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--backgroundcolor);
+        font-size: var(--txt);
+      }
+
+      .ingBtn{
+        width: 40%;
+        height: 4vh;
+        min-height: 4vh;
+        background-color: var(--accentcolor);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      #recipeInstructions{
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: var(--mainTxt);
+        background-color: var(--primarycolor);
+        border-radius: 8px;
+        border-style: none;
+      }
+
+      .btnNewListDiv{
+        display: flex;
+        width: 100%;
+        height: 30%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .checkOffIcon, .underListItem{
+        cursor: pointer;
+      }
+
+      .btnEditDiv{
+        width: 85%;
+        height: 30%;
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .recipeInfoBtn{
+        cursor: pointer;
+      }

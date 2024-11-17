@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/b7b6d87d91.js" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+</head>
+<body class="background">
+        <div class="outerContent">
+                <div class="topBar">
+                        <p class="mainIcon"><i class="fa-solid fa-cart-shopping"></i></p>
+                        <p class="title">Grocery Guide</p>
+                </div>
+                <div class="middle">
+                        <div class="innerTitleDiv">
+                                <a class="innerTitle" href="./lists.html"><i class="fa-solid fa-arrow-left"></i></a>
+                                <p class="innerTitle" id="listTitle">HELLO</p>
+                                <a class="innerTitle"><i class="fa-solid fa-lightbulb" onclick="openBudgetModal()" id="lightBulb"></i></a>
+                                <a class="innerTitle" onclick="openEditModal()"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                        <div class="inListBody" id="inListBody">
+                                <div class="inListItem">
+                                        <p><i class="fa-regular fa-circle-check"></i></p>
+                                        <p class="inListItemTitle">Toilet Paper</p>
+                                </div>
+                                <div class="underListItem" data-item="">
+                                        <p><i class="fa-solid fa-circle-info"></i></p>
+                                        <div class="innerInfoDiv">
+                                                <p>$27.54</p>
+                                                <p>$0.05/sq ft & 584 sq ft</p>
+                                        </div>
+                                </div>
+                                <div class="inListItem">
+                                        <p><i class="fa-regular fa-circle-check"></i></p>
+                                        <p class="inListItemTitle">Paper Plates</p>
+                                </div>
+                                <div class="underListItem" data-item="">
+                                        <p><i class="fa-solid fa-circle-info"></i></p>
+                                        <div class="innerInfoDiv">
+                                                <p>$8.82</p>
+                                                <p>$0.10/ct & 85ct</p>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="totalSummary">
+                                <div class="inBudget" id="budgetColor">
+                                        <p id="budgetMessage">in<br>budget!</p>
+                                </div>
+                                <div class="totals">
+                                        <div class="innerTotalsDiv"><p>subtotal: </p><p id="inSub"> $43</p></div>
+                                        <div class="innerTotalsDiv"><p>tax: </p><p id="inTax"> $2.72</p></div>
+                                        <div class="innerTotalsDiv"><p>total: </p><p id="inTotal"> $46.24</p></div>
+                                        <div class="innerTotalsDiv"><p>budget: </p><p id="inBudg"> $50.00</p></div>
+                                </div>
+                        </div>
+                </div>
+                <div class="bottBar">
+                        <div class="innerBottBar">
+                                <a class="mainIcon" id="list" href="./lists.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-list"></i></a>
+                                <a class="mainIcon" id="home" href="./content.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-house"></i></a>
+                                <a class="mainIcon" id="filters" href="./filters.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-filter"></i></a>
+                        </div>
+                </div>
+                <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                                <span class="close" id="close">&times;</span>
+                                <div class="innerModalContent">
+                                        <p class="innerTitle" id="modalTitle">Toilet Paper</p>
+                                        <p class="modalTxt" id="modalBrand">Charmin Ultra Soft  Toilet Paper - 24 Rolls</p>
+                                        <p class="modalTxt" id="modalPrice">$27.54</p>
+                                        <p class="modalTxt" id="modalPerPrice">$0.05/sq ft & 584 sq ft</p>
+                                        <p class="innerTitle" id="altTitle">Cheaper Alternatives: </p>
+                                        <div id="altsList">
+                                                <div class="altOption">
+                                                        <p>Cottonelle Ultra Comfort Toilet Paper - 24 Roll<br>$21.82<br>$0.04/sq ft</p>
+                                                        <p class="replaceIcon"><i class="fa-solid fa-repeat"></i></p>
+                                                </div>
+                                                <div class="altOption">
+                                                        <p>Cottonelle Ultra Comfort Toilet Paper - 24 Roll<br>$21.82<br>$0.04/sq ft</p>
+                                                        <p class="replaceIcon"><i class="fa-solid fa-repeat"></i></p>
+                                                </div>
+                                                <div class="altOption">
+                                                        <p>Cottonelle Ultra Comfort Toilet Paper - 24 Roll<br>$21.82<br>$0.04/sq ft</p>
+                                                        <p class="replaceIcon"><i class="fa-solid fa-repeat"></i></p>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                      
+                </div>
+
+                <div id="editModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content-edit">
+                                <span class="close" onclick="closeEditModal()">&times;</span>
+                                <div class="innerModalContent">
+                                        <p class="innerTitle" id="modalTitle">Edit List</p>
+                                        <div class="editListDiv" id="editListDiv">
+                                                <div class="newListInputDiv">
+                                                        <p class="newListLabel">Title: </p>
+                                                        <input class="newListInput" type="text" id="editListName">
+                                                </div>
+                                                <div class="newListInputDiv">
+                                                        <p class="newListLabel">Date: </p>
+                                                        <input class="newListInput" type="date" id="editListDate">
+                                                </div>
+                                        </div>
+                                        <div class="btnEditDiv">
+                                                <div class="newListItemBtn" id="newItem">
+                                                        <p>+item</p>
+                                                </div>
+                                                <div class="newListItemBtn" id="doneItem">
+                                                        <p>done</p>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                      
+                </div>
+
+                <div id="outBudgetModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                                <span class="close" onclick="closeBudgetModal()">&times;</span>
+                                <div class="innerModalContent">
+                                        <p class="innerTitle" id="budgetTitle">Out of Budget!</p>
+                                        <p id="difference"></p>
+                                        <div class="suggestions" id="suggestions"></div>
+                                </div>
+                        </div>
+                      
+                </div>
+        </div>
+        <script>
+                window.onload = function() {
+                        renderList();
+                        document.getElementById("close").addEventListener("click", function() {
+                                document.getElementById("myModal").style.display = "none";
+                        });
+                };
+
+                function openBudgetModal(){
+                        let allL = JSON.parse(localStorage.getItem('allLists'));
+                        //console.log(allL);
+                        let currInd = localStorage.getItem('currentList');
+                        if(allL){
+                                let currL = allL[currInd];
+                                let newItems = [];
+                                
+                                for(let i = 0; i < currL.items.length; i++){
+                                        let currI = currL.items[i];
+                                        //console.log(currI);
+                                        currI = new item(currI.name, currI.price, currI.perPrice, currI.brand, currI.brandName, currI.checked);
+                                        newItems.push(currI);
+                                }
+                                currL = new list(currL.title, currL.date, newItems, currL.runningTotal);
+                                const listTitle = currL.title;
+                                const listDate = currL.date;
+                                const listItems = currL.items;
+                                const listRunningTotal = currL.runningTotal;
+                                const budget = localStorage.getItem('budget');
+                                const listTax = currL.tax();
+                                const listTotal = currL.total();
+                                const listSubtotal = currL.subtotal();
+                                const listIsInBudget = currL.inBudget();
+                                document.getElementById("outBudgetModal").style.display = "flex";
+                                if(currL.bareSubtotal() > budget){
+                                        document.getElementById("budgetTitle").innerHTML = "Out of Budget";
+                                        document.getElementById("difference").innerHTML = "by $" + getPriceStr(currL.bareSubtotal() - budget);
+                                        //document.getElementById("suggestions").innerHTML = "<p>Items</p>";
+                                        let suggs = document.getElementById("suggestions");
+                                        suggs.innerHTML = "";
+                                        let suggsTitle = document.createElement("p");
+                                        suggsTitle.className = "suggTitle"
+                                        suggsTitle.innerHTML = "These Items have Cheaper Alternatives: ";
+                                        
+                                        let suggsList = currL.getSuggestions();
+                                        let suggsDiv = document.createElement('div');
+                                        suggsDiv.className = "suggs";
+                                        
+                                        for(let i = 0; i < suggsList.length; i++){
+                                                let sw = document.createElement("p");
+                                                sw.className = "suggInner";
+                                                sw.innerHTML = suggsList[i] + ' <i class="fa-solid fa-arrow-right"></i>';
+                                                suggsDiv.appendChild(sw);
+
+                                                sw.addEventListener("click", function() {
+                                                        let unders = document.querySelectorAll('.underListItem');
+                                                        let titles = document.querySelectorAll(".inListItemTitle");
+                                                        let ind = -1;
+                                                        for(let j = 0; j < titles.length; j++){
+                                                                if(titles[j].innerHTML == suggsList[i]){
+                                                                        ind = j;
+                                                                        break;
+                                                                }
+                                                        }
+                                                        if(ind != -1){
+                                                                closeBudgetModal();
+                                                                unders[ind].click();
+                                                        }
+                                                });
+                                        }
+                                        //console.log(suggsList);
+
+                                        suggs.appendChild(suggsTitle);
+                                        suggs.appendChild(suggsDiv);
+                                }else{
+                                        document.getElementById("budgetTitle").innerHTML = "In Budget!";
+                                        document.getElementById("difference").innerHTML = "No Suggestions.";
+                                }
+                        }
+                }
+
+                function closeBudgetModal(){
+                        document.getElementById("outBudgetModal").style.display = "none";
+                }
+
+                function openEditModal(){
+                        let allL = JSON.parse(localStorage.getItem('allLists'));
+                        //console.log(allL);
+                        let currInd = localStorage.getItem('currentList');
+                        document.getElementById('editListDiv').innerHTML = `
+                                                <div class="newListInputDiv">
+                                                        <p class="newListLabel">Title: </p>
+                                                        <input class="newListInput" type="text" id="editListName">
+                                                </div>
+                                                <div class="newListInputDiv">
+                                                        <p class="newListLabel">Date: </p>
+                                                        <input class="newListInput" type="date" id="editListDate">
+                                                </div>`;
+                        if(allL){
+                                let currL = allL[currInd];
+                                let newItems = [];
+                                
+                                for(let i = 0; i < currL.items.length; i++){
+                                        let currI = currL.items[i];
+                                        //console.log(currI);
+                                        currI = new item(currI.name, currI.price, currI.perPrice,currI.brand, currI.brandName, currI.checked);
+                                        newItems.push(currI);
+                                }
+                                currL = new list(currL.title, currL.date, newItems, currL.runningTotal);
+                                const listTitle = currL.title;
+                                const listDate = currL.date;
+                                const listItems = currL.items;
+                                const listTax = currL.tax();
+                                const listTotal = currL.total();
+                                const listSubtotal = currL.subtotal();
+                                const listIsInBudget = currL.inBudget();
+                                document.getElementById("editListName").value = listTitle;
+                                document.getElementById("editListDate").value = formatDateForInput(listDate);
+                                let outerDivEl = document.getElementById("editListDiv");
+                                for(let i = 0; i< listItems.length; i++){
+                                        let itemDiv = document.createElement('div');
+                                        itemDiv.classList.add('newListInputDiv', 'specialEditInputs');
+
+                                        let dLabel = document.createElement('p');
+                                        dLabel.className = 'newListDelBtn';
+                                        dLabel.innerHTML = '<i class="fa-solid fa-x"></i>';
+                                        let label = document.createElement('p');
+                                        label.className = 'newListLabel';
+                                        label.innerHTML = "Item: ";
+                                        let itemInput = document.createElement('select');
+                                        itemInput.className = 'itemSelect';
+
+                                        let itemOptions = getUniqueItemTypes();
+                                        for(let j = 0; j < itemOptions.length; j++){
+                                                let option = document.createElement('option');
+                                                option.textContent = itemOptions[j];
+                                                itemInput.appendChild(option);
+                                        }
+                                        itemInput.value = listItems[i].name;
+                                        itemDiv.appendChild(dLabel);
+                                        itemDiv.appendChild(label);
+                                        itemDiv.appendChild(itemInput);
+
+
+                                        let brandDiv = document.createElement('div');
+                                        brandDiv.classList.add('newListInputDiv', 'specialEditBrandInputs');
+                                        let brandLabel = document.createElement('p');
+                                        brandLabel.className = 'newListLabel';
+                                        brandLabel.innerHTML = "Brand: ";
+
+                                        let brandInput = document.createElement('select');
+                                        brandInput.className = 'brandSelect';
+                                        let brandOptions = getBrands(listItems[i].name);
+                                        for(let j = 0; j < brandOptions.length; j++){
+                                                let option = document.createElement('option');
+                                                option.textContent = brandOptions[j].brandName + " - " + brandOptions[j].price;
+                                                option.value = j;
+                                                brandInput.appendChild(option);
+                                        }
+                                        brandDiv.appendChild(brandLabel);
+                                        brandDiv.appendChild(brandInput);
+
+                                        outerDivEl.appendChild(itemDiv);
+                                        outerDivEl.appendChild(brandDiv);
+
+                                        itemInput.addEventListener("change", function() {
+                                                let brandOpts = getBrands(this.value);
+                                                brandInput.innerHTML = "";
+                                                for(let j = 0; j < brandOpts.length; j++){
+                                                        let option = document.createElement("option");
+                                                        option.textContent = brandOpts[j].brandName + " - $" + getPriceStr(brandOpts[j].price);
+                                                        option.value = j;
+                                                        brandInput.appendChild(option);
+                                                }
+                                        });
+
+                                        dLabel.addEventListener("click", function() {
+                                                outerDivEl.removeChild(brandDiv);
+                                                outerDivEl.removeChild(itemDiv);
+                                        });
+                                }
+
+                                document.getElementById("newItem").addEventListener("click", function() {
+                                        //alert("HELLO");
+                                        //let outerDivEl = document.getElementById("editListDiv");
+                                        let addDiv = document.createElement("div");
+                                        addDiv.classList.add("newListInputDiv", "specialEditInputs");
+                                        let de = document.createElement('p');
+                                        de.className = 'newListDelBtn';
+                                        de.innerHTML = '<i class="fa-solid fa-x"></i>';
+                                        let addLabel = document.createElement("p");
+                                        addLabel.className = "newListLabel";
+                                        addLabel.textContent = "Item: ";
+                                        let addItemInput = document.createElement("select");
+                                        addItemInput.className = "itemSelect";
+                                        let itemOptions = getUniqueItemTypes();
+                                        for(let i = 0; i < itemOptions.length; i++){
+                                                let option = document.createElement("option");
+                                                option.textContent = itemOptions[i];
+                                                addItemInput.appendChild(option);
+                                        }
+                                        addDiv.appendChild(de);
+                                        addDiv.appendChild(addLabel);
+                                        addDiv.appendChild(addItemInput);
+
+                                        let addBrandDiv = document.createElement("div");
+                                        addBrandDiv.classList.add("newListInputDiv", 'specialEditBrandInputs');
+                                        let addBrandLabel = document.createElement("p");
+                                        addBrandLabel.className = "newListLabel";
+                                        addBrandLabel.textContent = "Brand: ";
+
+                                        let addBrandItemInput = document.createElement("select");
+                                        addBrandItemInput.className = "itemSelect";
+
+                                        let brandO = getBrands(addItemInput.value);
+                                        for(let j = 0; j < brandO.length; j++){
+                                                let option = document.createElement("option");
+                                                option.textContent = brandO[j].brandName + " - $" + getPriceStr(brandO[j].price);
+                                                option.value = j;
+                                                addBrandItemInput.appendChild(option);
+                                        }
+
+                                        addBrandDiv.appendChild(addBrandLabel);
+                                        addBrandDiv.appendChild(addBrandItemInput);
+
+                                        outerDivEl.appendChild(addDiv);
+                                        outerDivEl.appendChild(addBrandDiv);
+
+                                        outerDivEl.scrollTop = outerDivEl.scrollHeight;
+
+                                        de.addEventListener("click", function() {
+                                                outerDivEl.removeChild(addBrandDiv);
+                                                outerDivEl.removeChild(addDiv);
+                                        });
+
+                                        addItemInput.addEventListener("change", function() {
+                                                let bO = getBrands(this.value);
+                                                addBrandItemInput.innerHTML = "";
+                                                for(let j = 0; j < bO.length; j++){
+                                                        let option = document.createElement("option");
+                                                        option.textContent = bO[j].brandName + " - $" + getPriceStr(bO[j].price);
+                                                        option.value = j;
+                                                        addBrandItemInput.appendChild(option);
+                                                }
+                                        });
+                                        
+                                        /*
+                                        
+                                        
+
+                                        outerDivEl.appendChild(addDiv);
+                                        outerDivEl.appendChild(addBrandDiv);
+
+                                        addItemInput.addEventListener("change", function() {
+                                                let brandOptions = getBrands(this.value);
+                                                addBrandItemInput.innerHTML = "";
+                                                for(let j = 0; j < brandOptions.length; j++){
+                                                        let option = document.createElement("option");
+                                                        option.textContent = brandOptions[j].brandName + " - $" + getPriceStr(brandOptions[j].price);
+                                                        option.value = j;
+                                                        addBrandItemInput.appendChild(option);
+                                                }
+                                        });
+
+                                        */
+                                });
+
+                                document.getElementById("doneItem").addEventListener("click", function() {
+                                        //alert("DONE");
+                                        let newTitle = document.getElementById("editListName").value;
+                                        let newDate = new Date(document.getElementById("editListDate").value);
+                                        // Adjust for the time zone offset
+                                        newDate.setMinutes(newDate.getMinutes() + newDate.getTimezoneOffset());
+                                        newDate = newDate.toLocaleDateString();
+                                        let newItems = [];
+
+                                        let itemInputs = document.querySelectorAll(".specialEditInputs");
+                                        let brandInputs = document.querySelectorAll(".specialEditBrandInputs");
+                                        for(let i = 0; i < itemInputs.length; i++){
+                                                let selectedIndex = brandInputs[i].lastChild.value;
+                                                let selectedBrand = getBrands(itemInputs[i].lastChild.value)[selectedIndex];
+                                                newItems.push(selectedBrand);
+                                        }
+                                        let editedList = new list(newTitle, newDate, newItems, false);
+                                        delete allL[currInd];
+                                        allL[currInd] = editedList;
+                                        localStorage.setItem('allLists', JSON.stringify(allL));
+                                        closeEditModal();
+                                        renderList();
+                                });
+                        }
+                        document.getElementById("editModal").style.display = "flex";
+                }
+
+                function closeEditModal(){
+                        document.getElementById("editModal").style.display = "none";
+                }
+
+                function renderList() {
+                        //alert("RENDER");
+                        /*localStorage.setItem('currentList', num);
+                        localStorage.setItem('budget', budget);
+                        localStorage.setItem('allLists', JSON.stringify(lists));*/
+                        let allL = JSON.parse(localStorage.getItem('allLists'));
+                        //console.log(allL);
+                        let currInd = localStorage.getItem('currentList');
+                        if(allL){
+                                let currL = allL[currInd];
+                                let newItems = [];
+                                
+                                for(let i = 0; i < currL.items.length; i++){
+                                        let currI = currL.items[i];
+                                        //console.log(currI);
+                                        currI = new item(currI.name, currI.price, currI.perPrice, currI.brand, currI.brandName, currI.checked);
+                                        newItems.push(currI);
+                                }
+                                currL = new list(currL.title, currL.date, newItems, currL.runningTotal);
+                                const listTitle = currL.title;
+                                const listDate = currL.date;
+                                const listItems = currL.items;
+                                const listRunningTotal = currL.runningTotal;
+                                const budget = localStorage.getItem('budget');
+                                const listTax = currL.tax();
+                                const listTotal = currL.total();
+                                const listSubtotal = currL.subtotal();
+                                const listIsInBudget = currL.inBudget();
+
+                                document.getElementById("listTitle").innerHTML = listTitle + " - " + listDate;
+                                document.getElementById("inListBody").innerHTML = "";
+
+                                for(let i = 0; i < listItems.length; i++){
+                                        let isChecked = listItems[i].checked;
+                                        console.log(listItems[i]);
+                                        let checkIcon = "";
+                                        if(isChecked == true){
+                                                checkIcon = '<i class="fa-solid fa-circle-check"></i>';
+                                        }else if(isChecked == false){
+                                                checkIcon = '<i class="fa-regular fa-circle-check"></i>'
+                                        }
+                                        document.getElementById("inListBody").innerHTML += "<div class='inListItem'><p class='checkOffIcon' data-index='" + i + "'>" + checkIcon + "</p><p class='inListItemTitle'>" + listItems[i].name + "</p></div><div class='underListItem' data-item=" + encodeURIComponent(JSON.stringify(listItems[i])) + "><p class='infoIcon'><i class='fa-solid fa-circle-info'></i></p><div class='innerInfoDiv'><p>$" + getPriceStr(listItems[i].price) + "</p><p>" + listItems[i].perPrice + "</p></div></div>";
+                                }
+
+                                document.querySelectorAll(".checkOffIcon").forEach(icon => {
+                                        icon.addEventListener("click", function() {
+                                                let ind = icon.getAttribute('data-index');
+                                                //console.log(listItems[Number(ind)]);
+                                                listItems[Number(ind)].toggleCheck();
+                                                let cList = new list(listTitle, listDate, listItems, listRunningTotal);
+                                                delete allL[currInd];
+                                                allL[currInd] = cList;
+                                                localStorage.setItem('allLists', JSON.stringify(allL));
+                                                console.log(allL);
+                                                renderList();
+                                        });
+                                });
+
+                                document.getElementById("inSub").innerHTML = "$" + getPriceStr(listSubtotal);
+                                document.getElementById("inTax").innerHTML = "$" + getPriceStr(listTax);
+                                document.getElementById("inTotal").innerHTML = "$" + getPriceStr(listTotal);
+                                document.getElementById("inBudg").innerHTML = "$" + getPriceStr(budget);
+
+                                if(listIsInBudget == true){
+                                        document.getElementById('budgetMessage').innerHTML = 'in<br>budget!';
+                                        document.getElementById('budgetColor').style.backgroundColor = "#02291B";
+                                }else{
+                                        document.getElementById('budgetMessage').innerHTML = 'out<br>of<br>budget';
+                                        document.getElementById('budgetColor').style.backgroundColor = "#660000";
+                                }
+
+                                if(currL.bareSubtotal() > budget){
+                                        document.getElementById("lightBulb").style.color = "#660000";
+                                }
+
+
+
+                                document.getElementById('budgetColor').addEventListener("click", function() {
+                                        if(currL.runningTotal == true){
+                                                currL.runningTotal = false;
+                                        }else if(currL.runningTotal == false){
+                                                currL.runningTotal = true;
+                                        }
+                                        
+                                        delete allL[currInd];
+                                        allL[currInd] = currL;
+                                        //console.log(allL);
+                                        localStorage.setItem('allLists', JSON.stringify(allL));
+                                        renderList();
+                                });
+
+
+
+                                document.querySelectorAll('.underListItem').forEach(it => {
+                                        it.addEventListener("click", function() {
+                                                //alert("HELLO");
+                                                document.getElementById("myModal").style.display = "flex";
+                                                let currItem = JSON.parse(decodeURIComponent(it.getAttribute('data-item')));
+                                                //alert(currItem.brand);
+                                                currItem = new item(currItem.name, currItem.price, currItem.perPrice, currItem.brand, currItem.brandName, currItem.checked);
+                                                document.getElementById("modalTitle").innerHTML = currItem.name;
+                                                document.getElementById("modalBrand").innerHTML = currItem.brandName;
+                                                document.getElementById("modalPrice").innerHTML = "$" + getPriceStr(currItem.price);
+                                                document.getElementById("modalPerPrice").innerHTML = currItem.perPrice;
+                                                
+                                                let filterBrands = [];
+                                                if(localStorage.getItem('brandFilters') !== null){
+                                                        filterBrands = JSON.parse(localStorage.getItem('brandFilters'));
+                                                }
+                                                
+                                                document.getElementById('altsList').innerHTML = "";
+                                                if(filterBrands.includes(currItem.brand) == false){
+                                                        let alts = getAltItems(currItem);
+                                                        if(alts.length > 0){
+                                                                for(let i = 0; i < alts.length; i++){
+                                                                        document.getElementById('altsList').innerHTML += 
+                                                                                `
+                                                                                <div class="altOption">
+                                                                                        <p>${alts[i].brandName}<br>$${getPriceStr(alts[i].price)}<br>${alts[i].perPrice}</p>
+                                                                                        <p class="replaceIcon" 
+                                                                                        data-item="${encodeURIComponent(JSON.stringify(alts[i]))}"
+                                                                                        data-curr="${encodeURIComponent(JSON.stringify(currItem))}"
+                                                                                        data-cList="${encodeURIComponent(JSON.stringify(currL))}">
+                                                                                        <i class="fa-solid fa-repeat">
+                                                                                        </i>
+                                                                                        </p>
+                                                                                </div>
+                                                                                `;
+                                                                }
+                                                                document.querySelectorAll('.replaceIcon').forEach(icon => {
+                                                                        icon.addEventListener("click", function() {
+                                                                                //get the alt item
+                                                                                let altItem = JSON.parse(decodeURIComponent(this.getAttribute('data-item')));
+                                                                                altItem = new item(altItem.name, altItem.price, altItem.perPrice, altItem.brand, altItem.brandName, altItem.checked);
+                                                                                //get the current item
+                                                                                let cItem = JSON.parse(decodeURIComponent(icon.getAttribute('data-curr')));
+                                                                                cItem = new item(cItem.name, cItem.price, cItem.perPrice, cItem.brand, cItem.brandName, cItem.checked);
+                                                                                //get the current list
+                                                                                let cList = JSON.parse(decodeURIComponent(icon.getAttribute('data-cList')));
+                                                                                newCList = [];
+                                                                                for(let i = 0; i < cList.items.length; i++){
+                                                                                        let newItem = new item(cList.items[i].name, cList.items[i].price, cList.items[i].perPrice, cList.items[i].brand, cList.items[i].brandName, cList.items[i].checked);
+                                                                                        newCList.push(newItem);
+                                                                                }
+                                                                                cList = new list(cList.title, cList.date, newCList, cList.runningTotal);
+                                                                                //switch the current item in the list with the alt item
+                                                                                cList.switchItem(cItem, altItem);
+                                                                                
+                                                                                //replace the current list in the allLists array
+                                                                                delete allL[currInd];
+                                                                                allL[currInd] = cList;
+                                                                                localStorage.setItem('allLists', JSON.stringify(allL));
+                                                                                //console.log(allL);
+                                                                                //close the modal
+                                                                                document.getElementById("myModal").style.display = "none";
+                                                                                //rerender
+                                                                                renderList();
+                                                                        });
+                                                                });
+                                                        }else{
+                                                                document.getElementById('altTitle').innerHTML = '';
+                                                        }
+                                                }else if(filterBrands.includes(currItem.brand) == true){
+                                                        document.getElementById('altTitle').innerHTML = '';
+                                                }
+                                        });
+                                });
+                        }
+                }
+        </script>
+</body>
+</html>

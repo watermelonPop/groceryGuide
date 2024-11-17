@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/b7b6d87d91.js" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+</head>
+<body class="background">
+        <div class="outerContent">
+                <div class="topBar">
+                        <p class="mainIcon"><i class="fa-solid fa-cart-shopping"></i></p>
+                        <p class="title">Grocery Guide</p>
+                </div>
+                <div class="middle">
+                        <div class="innerTitleDiv">
+                                <p class="innerTitle">Filters & Settings</p>
+                        </div>
+                        <div class="filterDiv" id="filterDiv">
+                                <div class="innerFilter">
+                                        <p class="newListLabel">Set Budget: </p>
+                                        <input class="newListInput" id="budgetInput" type="number">
+                                </div>
+                                <div class="innerFilter">
+                                        <p class="newListLabel">Sort Alt Options: </p>
+                                        <select class="newListInput" id="sortOptions">
+                                                <option value="none">none</option>
+                                                <option value="lowest to highest price">lowest to highest price</option>
+                                                <option value="highest to lowest price">highest to lowest price</option>
+                                        </select>
+                                </div>
+                                <p class="filterTitle">Do not show alternatives for: </p>
+                                <div class="saveBtn" onclick="addBrandFilter()">
+                                        <p>+ brand filter</p>
+                                </div>
+                                <div class="saveBtn" onclick="saveSettings()">
+                                        <p>save</p>
+                                </div>
+                        </div>
+                </div>
+                <div class="bottBar">
+                        <div class="innerBottBar">
+                                <a class="mainIcon" id="list" href="./lists.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-list"></i></a>
+                                <a class="mainIcon" id="home" href="./content.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-house"></i></a>
+                                <a class="mainIcon" id="filters" href="./filters.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-filter"></i></a>
+                        </div>
+                </div>
+                <div id="saveModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content-save">
+                                <span class="close" onclick="closeSaveModal()">&times;</span>
+                                <div class="innerSaveDiv">
+                                        <p class="saveTxt">Filters & Settings<br>Saved!</p>
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+        <script>
+                window.onload = function() {
+                        if(localStorage.getItem('budget') !== null){
+                                document.getElementById('budgetInput').value = localStorage.getItem('budget');
+                        }else{
+                                document.getElementById('budgetInput').value = budget;
+                                localStorage.setItem('budget', budget);
+                        }
+                        if(localStorage.getItem('sort') !== null){
+                                document.getElementById('sortOptions').value = localStorage.getItem('sort');
+                        }
+                        if(localStorage.getItem('brandFilters') !== null){
+                                let filterList = JSON.parse(localStorage.getItem('brandFilters'));
+                                //alert(filterList.length);
+                                let outerFilterDiv = document.getElementById("filterDiv");
+                                let saveBtn = outerFilterDiv.lastElementChild;
+                                outerFilterDiv.removeChild(saveBtn);
+                                let addBtn = outerFilterDiv.lastElementChild;
+                                outerFilterDiv.removeChild(addBtn);
+                                for(let i = 0; i < filterList.length; i++){
+                                        let newFilter = document.createElement('div');
+                                        newFilter.className = "innerFilter";
+
+                                        let filterDel = document.createElement('p');
+                                        filterDel.className = 'newListDelBtn';
+                                        filterDel.innerHTML = '<i class="fa-solid fa-x"></i>';
+                                        let filterP = document.createElement('p');
+                                        filterP.className = "newListLabel";
+                                        filterP.textContent = "brand filter:";
+
+                                        let filterSelect = document.createElement('select');
+                                        filterSelect.classList.add("specialFilterInput", "newListInput");
+                                        let uniqueBrands = getUniqueBrands();
+                                        for(let j = 0; j < uniqueBrands.length; j++){
+                                                let option = document.createElement('option');
+                                                option.value = uniqueBrands[j];
+                                                option.textContent = uniqueBrands[j]
+                                                filterSelect.appendChild(option);
+                                        }
+                                        filterSelect.value = filterList[i];
+                                        newFilter.appendChild(filterDel);
+                                        newFilter.appendChild(filterP);
+                                        newFilter.appendChild(filterSelect);
+                                        outerFilterDiv.appendChild(newFilter);
+
+                                        filterDel.addEventListener("click", function() {
+                                                outerFilterDiv.removeChild(newFilter);
+                                        });
+                                }
+
+                                outerFilterDiv.appendChild(addBtn);
+                                outerFilterDiv.appendChild(saveBtn);
+                        }
+                };
+                function addBrandFilter(){
+                        let filterDiv = document.getElementById("filterDiv");
+                        let saveBtn = filterDiv.lastElementChild;
+                        //console.log(saveBtn);
+                        filterDiv.removeChild(saveBtn);
+                        let addBtn = filterDiv.lastElementChild;
+                        filterDiv.removeChild(addBtn);
+
+                        let newFilter = document.createElement('div');
+                        newFilter.className = "innerFilter";
+
+                        let deleteFilter = document.createElement('p');
+                        deleteFilter.className = 'newListDelBtn';
+                        deleteFilter.innerHTML = '<i class="fa-solid fa-x"></i>';
+
+                        let newFilterP = document.createElement('p');
+                        newFilterP.className = "newListLabel";
+                        newFilterP.textContent = "brand filter: ";
+                        let newFilterSelect = document.createElement('select');
+                        let uniqueBrands = getUniqueBrands();
+                        for(let i = 0; i < uniqueBrands.length; i++){
+                                let option = document.createElement('option');
+                                option.value = uniqueBrands[i];
+                                option.textContent = uniqueBrands[i];
+                                newFilterSelect.appendChild(option);
+                        }
+                        //newFilterSelect.className = "newListInput";
+                        newFilterSelect.classList.add("newListInput", "specialFilterInput");
+                        newFilter.appendChild(deleteFilter);
+                        newFilter.appendChild(newFilterP);
+                        newFilter.appendChild(newFilterSelect);
+                        filterDiv.appendChild(newFilter);
+
+                        filterDiv.appendChild(addBtn);
+                        filterDiv.appendChild(saveBtn);
+
+                        deleteFilter.addEventListener("click", function() {
+                                filterDiv.removeChild(newFilter);
+                        });
+
+                }
+                function saveSettings(){
+                        localStorage.setItem('sort', document.getElementById("sortOptions").value);
+                        let brandFilters = document.querySelectorAll(".specialFilterInput");
+                        //alert(brandFilters.length);
+                        let filterList = [];
+                        for(let i = 0; i < brandFilters.length; i++){
+                                filterList.push(brandFilters[i].value)
+                        }
+                        localStorage.setItem('brandFilters', JSON.stringify(filterList));
+                        localStorage.setItem('budget', document.getElementById('budgetInput').value);
+                        if(localStorage.getItem('sort') == document.getElementById("sortOptions").value && localStorage.getItem('brandFilters') == JSON.stringify(filterList) && localStorage.getItem('budget') == document.getElementById('budgetInput').value){
+                                document.getElementById("saveModal").style.display = "flex";
+                        }
+                }
+                function closeSaveModal(){
+                        document.getElementById("saveModal").style.display = "none";
+                }
+        </script>
+</body>
+</html>

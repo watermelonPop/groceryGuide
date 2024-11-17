@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/b7b6d87d91.js" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+</head>
+<body class="background">
+        <div class="outerContent">
+                <div class="topBar">
+                        <p class="mainIcon"><i class="fa-solid fa-cart-shopping"></i></p>
+                        <p class="title">Grocery Guide</p>
+                </div>
+                <div class="middle">
+                        <div class="innerTitleDiv">
+                                <p class="innerTitle">Home</p>
+                        </div>
+                        <div class="homeDiv">
+                                <p class="homeTitle">Quick Buttons</p>
+                                <a href="./recipes.html" class="quickBtn">my recipes</a>
+                                <a href="./newList.html" class="quickBtn">new list</a>
+                                <a href="./lists.html" class="quickBtn">lists</a>
+                                <a href="./filters.html" class="quickBtn">add filter</a>
+                                <button onclick="resetLocalStorage()" class="quickBtn">reset demo</button>
+                        </div>
+                </div>
+                <div class="bottBar">
+                        <div class="innerBottBar">
+                                <a class="mainIcon" id="list" href="./lists.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-list"></i></a>
+                                <a class="mainIcon" id="home" href="./content.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-house"></i></a>
+                                <a class="mainIcon" id="filters" href="./filters.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-filter"></i></a>
+                        </div>
+                </div>
+                <div id="resetModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content-save">
+                                <span class="close" onclick="closeResetModal()">&times;</span>
+                                <div class="innerSaveDiv">
+                                        <p class="saveTxt">Demo<br>Reset!</p>
+                                </div>
+                        </div>
+                      
+                </div>
+        </div>
+</body>
+<script>
+        function openResetModal(){
+                document.getElementById("resetModal").style.display = "flex";
+        }
+
+        function closeResetModal(){
+                document.getElementById("resetModal").style.display = "none";
+        }
+</script>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/b7b6d87d91.js" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+</head>
+<body class="background">
+        <div class="outerContent">
+                <div class="topBar">
+                        <p class="mainIcon"><i class="fa-solid fa-cart-shopping"></i></p>
+                        <p class="title">Grocery Guide</p>
+                </div>
+                <div class="middle">
+                        <div class="innerTitleDiv">
+                                <a class="innerTitle" href="./lists.html"><i class="fa-solid fa-arrow-left"></i></a>
+                                <p class="innerTitle" id="listTitle">New List</p>
+                        </div>
+                        <div class="newListDiv" id="newListDiv">
+                                <div class="newListInputDiv">
+                                        <p class="newListLabel">Title: </p>
+                                        <input class="newListInput" type="text" id="newListName">
+                                </div>
+                                <div class="newListInputDiv">
+                                        <p class="newListLabel">Date: </p>
+                                        <input class="newListInput" type="date" id="newListDate">
+                                </div>
+                        </div>
+                        <div class="btnNewListDiv">
+                                <div class="newListItemBtn" onclick="addItemToNewList()">
+                                        <p>+ item</p>
+                                </div>
+                                <div class="newListItemBtn" onclick="openRecipesModal()">
+                                        <p>recipes</p>
+                                </div>
+                                <div class="newListItemBtn">
+                                        <p onclick="createNewList()">create</p>
+                                </div>
+                        </div>
+                </div>
+                <div class="bottBar">
+                        <div class="innerBottBar">
+                                <a class="mainIcon" id="list" href="./lists.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-list"></i></a>
+                                <a class="mainIcon" id="home" href="./content.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-house"></i></a>
+                                <a class="mainIcon" id="filters" href="./filters.html" onmouseenter="displayBtnTxt(this)" onmouseleave="redisplayIcon(this)"><i class="fa-solid fa-filter"></i></a>
+                        </div>
+                </div>
+                <div id="recipesModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                                <span class="close" onclick="closeRecipesModal()">&times;</span>
+                                <div class="innerModalContent">
+                                        <p class="innerTitle">Recipes</p>
+                                        <div class="recipeDiv" id="recipeDiv">
+                                        </div>
+                                </div>
+                        </div>
+                      
+                </div>
+        </div>
+
+        <script>
+                /*window.onload = function() {
+                        
+                };*/
+                function openRecipesModal(){
+                        document.getElementById('recipesModal').style.display = "flex";
+                        let recipeDiv = document.getElementById("recipeDiv");
+                        recipeDiv.innerHTML = "";
+                        for(let i = 0; i < recipes.length; i++){
+                                let outerRecipeDiv = document.createElement('div');
+                                outerRecipeDiv.className = "outerRecipeDiv";
+
+                                let innerRecipeDiv = document.createElement('div');
+                                innerRecipeDiv.className = "innerRecipeDiv";
+
+                                let recipeInfoBtn = document.createElement('p');
+                                recipeInfoBtn.className = "recipeInfoBtn";
+                                recipeInfoBtn.innerHTML = '<i class="fa-solid fa-circle-info"></i>';
+
+                                let recipeName = document.createElement('p');
+                                recipeName.textContent = recipes[i].name;
+                                
+                                let recipeAddBtn = document.createElement('p');
+                                recipeAddBtn.className = "addRecipeBtn";
+                                recipeAddBtn.textContent = "+";
+                                innerRecipeDiv.appendChild(recipeInfoBtn);
+                                innerRecipeDiv.appendChild(recipeName);
+                                innerRecipeDiv.appendChild(recipeAddBtn);
+                                outerRecipeDiv.appendChild(innerRecipeDiv);
+                                
+                                
+                                let bottomRecipeDiv = document.createElement('div');
+                                bottomRecipeDiv.className = "bottomRecipeDiv";
+
+                                let ingList = document.createElement('ul');
+                                let recipeIng = recipes[i].ingredients;
+
+                                for(let j = 0; j < recipeIng.length; j++){
+                                        //alert(recipeIng[j].name);
+                                        let ingItem = document.createElement('li');
+                                        ingItem.textContent = recipeIng[j].name;
+                                        ingList.appendChild(ingItem);
+                                }
+                                //alert(ingList);
+                                bottomRecipeDiv.appendChild(ingList);
+                                bottomRecipeDiv.style.display = "none";
+                                outerRecipeDiv.appendChild(bottomRecipeDiv);
+
+                                recipeDiv.append(outerRecipeDiv);
+
+                                recipeInfoBtn.addEventListener("click", function() {
+                                        if(bottomRecipeDiv.style.display == "none"){
+                                                innerRecipeDiv.style.height = "30%";
+                                                innerRecipeDiv.style.borderBottomLeftRadius = "0px";
+                                                innerRecipeDiv.style.borderBottomRightRadius = "0px";
+                                                bottomRecipeDiv.style.display = "flex";
+                                        }else if(bottomRecipeDiv.style.display == "flex"){
+                                                innerRecipeDiv.style.height = "100%";
+                                                innerRecipeDiv.style.borderBottomLeftRadius = "8px";
+                                                innerRecipeDiv.style.borderBottomRightRadius = "8px";
+                                                bottomRecipeDiv.style.display = "none";
+                                        }
+                                });
+
+                                recipeAddBtn.addEventListener("click", function() {
+                                        //alert("HELLO");
+                                        closeRecipesModal();
+                                        for(let k = 0; k < recipeIng.length; k++){
+                                                addSpecItemToNewList(recipeIng[k].name);
+                                        }
+                                });
+                        }
+                }
+
+                function closeRecipesModal(){
+                        document.getElementById('recipesModal').style.display = "none";
+                }
+
+                function addSpecItemToNewList(itemName) {
+                        const newListDiv = document.getElementById('newListDiv');
+                        
+
+                        const newElement = document.createElement('div');
+                        newElement.classList.add('newListInputDiv', 'specialInputDivs');
+
+                        const delLabel = document.createElement('p');
+                        delLabel.className = 'newListDelBtn';
+                        delLabel.innerHTML = '<i class="fa-solid fa-x"></i>';
+
+
+                        // Create the label and select elements
+                        const label = document.createElement('p');
+                        label.className = 'newListLabel';
+                        label.textContent = 'Item: ';
+
+                        const select = document.createElement('select');
+                        select.className = 'itemSelect';
+
+                        // Add options to the select element
+                        let uniqueTypes = getUniqueItemTypes();
+                        for (let i = 0; i < uniqueTypes.length; i++) {
+                                const option = document.createElement('option');
+                                option.textContent = uniqueTypes[i];
+                                select.appendChild(option);
+                        }
+                        select.value = itemName;
+
+                        // Append the label and select to the new element
+                        newElement.appendChild(delLabel);
+                        newElement.appendChild(label);
+                        newElement.appendChild(select);
+
+                        const secElement = document.createElement('div');
+                        secElement.classList.add('newListInputDiv', 'specialInputBrands');
+                        const seclabel = document.createElement('p');
+                        seclabel.className = 'newListLabel';
+                        seclabel.textContent = 'Brand: ';
+                        const secselect = document.createElement('select');
+                        secselect.className = 'brandSelect';
+
+
+                        let brandItems = getBrands(select.value);
+                        for (let i = 0; i < brandItems.length; i++) {
+                                const option = document.createElement('option');
+                                option.textContent = brandItems[i].brandName + "- $" + getPriceStr(brandItems[i].price);
+                                option.value = i;
+                                secselect.appendChild(option);
+                        }
+
+                        secElement.appendChild(seclabel);
+                        secElement.appendChild(secselect);
+
+
+                        // Append the new element and the last child back to the parent
+                        newListDiv.appendChild(newElement);
+                        newListDiv.appendChild(secElement);
+
+
+                        select.addEventListener("change", function() {
+                                let bI = getBrands(this.value);
+                                
+                                // Clear the secElement
+                                while (secElement.firstChild) {
+                                        secElement.removeChild(secElement.firstChild);
+                                }
+
+                                // Recreate the label and select elements
+                                const seclabel = document.createElement('p');
+                                seclabel.className = 'newListLabel';
+                                seclabel.textContent = 'Brand: ';
+                                
+                                const secselect = document.createElement('select');
+                                secselect.className = 'brandSelect';
+
+                                // Add new options to the select element
+                                for(let i = 0; i < bI.length; i++){
+                                        const option = document.createElement('option');
+                                        option.textContent = bI[i].brandName + "- $" + getPriceStr(bI[i].price);
+                                        option.value = i;
+                                        secselect.appendChild(option);
+                                }
+
+                                // Append the new elements to secElement
+                                secElement.appendChild(seclabel);
+                                secElement.appendChild(secselect);
+                        });
+
+                        delLabel.addEventListener("click", function() {
+                                newListDiv.removeChild(newElement);
+                                newListDiv.removeChild(secElement);
+                        });
+                }
+
+                function addItemToNewList() {
+                        const newListDiv = document.getElementById('newListDiv');
+                        
+
+                        const newElement = document.createElement('div');
+                        newElement.classList.add('newListInputDiv', 'specialInputDivs');
+
+                        const delLabel = document.createElement('p');
+                        delLabel.className = 'newListDelBtn';
+                        delLabel.innerHTML = '<i class="fa-solid fa-x"></i>';
+
+
+                        // Create the label and select elements
+                        const label = document.createElement('p');
+                        label.className = 'newListLabel';
+                        label.textContent = 'Item: ';
+
+                        const select = document.createElement('select');
+                        select.className = 'itemSelect';
+
+                        // Add options to the select element
+                        let uniqueTypes = getUniqueItemTypes();
+                        for (let i = 0; i < uniqueTypes.length; i++) {
+                                const option = document.createElement('option');
+                                option.textContent = uniqueTypes[i];
+                                select.appendChild(option);
+                        }
+
+                        // Append the label and select to the new element
+                        newElement.appendChild(delLabel);
+                        newElement.appendChild(label);
+                        newElement.appendChild(select);
+
+                        const secElement = document.createElement('div');
+                        secElement.classList.add('newListInputDiv', 'specialInputBrands');
+                        const seclabel = document.createElement('p');
+                        seclabel.className = 'newListLabel';
+                        seclabel.textContent = 'Brand: ';
+                        const secselect = document.createElement('select');
+                        secselect.className = 'brandSelect';
+
+
+                        let brandItems = getBrands(select.value);
+                        for (let i = 0; i < brandItems.length; i++) {
+                                const option = document.createElement('option');
+                                option.textContent = brandItems[i].brandName + "- $" + getPriceStr(brandItems[i].price);
+                                option.value = i;
+                                secselect.appendChild(option);
+                        }
+
+                        secElement.appendChild(seclabel);
+                        secElement.appendChild(secselect);
+
+
+                        // Append the new element and the last child back to the parent
+                        newListDiv.appendChild(newElement);
+                        newListDiv.appendChild(secElement);
+
+
+                        select.addEventListener("change", function() {
+                                let bI = getBrands(this.value);
+                                
+                                // Clear the secElement
+                                while (secElement.firstChild) {
+                                        secElement.removeChild(secElement.firstChild);
+                                }
+
+                                // Recreate the label and select elements
+                                const seclabel = document.createElement('p');
+                                seclabel.className = 'newListLabel';
+                                seclabel.textContent = 'Brand: ';
+                                
+                                const secselect = document.createElement('select');
+                                secselect.className = 'brandSelect';
+
+                                // Add new options to the select element
+                                for(let i = 0; i < bI.length; i++){
+                                        const option = document.createElement('option');
+                                        option.textContent = bI[i].brandName + "- $" + getPriceStr(bI[i].price);
+                                        option.value = i;
+                                        secselect.appendChild(option);
+                                }
+
+                                // Append the new elements to secElement
+                                secElement.appendChild(seclabel);
+                                secElement.appendChild(secselect);
+                        });
+
+                        delLabel.addEventListener("click", function() {
+                                newListDiv.removeChild(newElement);
+                                newListDiv.removeChild(secElement);
+                        });
+
+                        newListDiv.scrollTop = newListDiv.scrollHeight;
+                }
+
+                function createNewList() {
+                        let newListTitle = "untitled";
+                        let newListDate = "";
+                        let newListItems = [];
+                        if (document.getElementById("newListName").value.trim() !== "") {
+                                newListTitle = document.getElementById("newListName").value;
+                        }
+                        if (document.getElementById("newListDate").value.trim() === "") {
+                                alert("Empty Date");
+                        } else {
+                                let chosenDate = new Date(document.getElementById("newListDate").value);
+                                // Adjust for the time zone offset
+                                chosenDate.setMinutes(chosenDate.getMinutes() + chosenDate.getTimezoneOffset());
+                                newListDate = chosenDate.toLocaleDateString();
+
+                                let itemsL = document.querySelectorAll(".specialInputDivs");
+                                let brandsL = document.querySelectorAll(".specialInputBrands");
+                                //alert(brandsL[0].children);
+                                for(let i = 0; i < itemsL.length; i++){
+                                        let b = getBrands(itemsL[i].children[2].value);
+                                        let brandInd = brandsL[i].children[1].value;
+                                        newListItems.push(b[brandInd]);
+                                }
+                                //alert(itemsL.length);
+                                let newList = new list(newListTitle, newListDate, newListItems);
+                                console.log(newList);
+                                lists.push(newList);
+                                //console.log(lists);
+                                localStorage.setItem('allLists', JSON.stringify(lists));
+                                window.location.href = "./lists.html";
+                        }
+                }
+        </script>
+</body>
+</html>
